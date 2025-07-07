@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Documents</title>
+    <link rel="stylesheet" href="/CSS/mydocuments.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>📄 My Documents</h1>
+        <% if (documents.length === 0) { %>
+            <p class="no-docs">You haven't uploaded any documents yet.</p>
+            <% } else { %>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Uploaded</th>
+                            <th>Permission</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% documents.forEach(doc => { %>
+                            <tr>
+                                <td>
+                                    <%= doc.title %>
+                                </td>
+                                <td>
+                                    <%= doc.description %>
+                                </td>
+                                <td>
+                                    <%= new Date(doc.uploadedAt).toLocaleDateString() %>
+                                </td>
+                                <td>
+                                    <%= doc.permission %>
+                                </td>
+                                <td>
+                                    <a href="/view/<%= doc.id %>" class="btn view">View</a>
+                                    <a href="/edit/<%= doc.id %>" class="btn edit">Edit</a>
+                                    <form action="/delete/<%= doc.id %>" method="POST" style="display:inline;">
+                                        <button type="submit" class="btn delete">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+                <% } %>
+    </div>
+</body>
+
+</html>

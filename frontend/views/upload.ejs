@@ -1,0 +1,33 @@
+<!-- File: digitaldocs/frontend/views/upload.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Document</title>
+    <link rel="stylesheet" href="/CSS/upload.css">
+</head>
+
+<body>
+    <div class="upload-container">
+        <h2>Upload Document</h2>
+        <form action="/api/documents/upload" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="file">Choose File</label>
+                <input type="file" name="file" id="file" required>
+            </div>
+
+            <div class="form-group">
+                <label for="permission">Permission</label>
+                <select name="permission" id="permission" required>
+                    <option value="view">View Only</option>
+                    <option value="download">Download</option>
+                </select>
+            </div>
+
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+</body>
+
+</html>

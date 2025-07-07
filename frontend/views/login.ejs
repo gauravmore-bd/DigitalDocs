@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login - DigitalDocsHub</title>
+    <link rel="stylesheet" href="/CSS/login.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Welcome Back</h2>
+        <form action="/api/auth/login" method="POST">
+            <div class="form-group">
+                <label for="aadhaar">Aadhaar Number</label>
+                <input type="text" name="aadhaar" id="aadhaar" required maxlength="12" />
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" required />
+            </div>
+
+            <button type="submit">Login</button>
+        </form>
+
+        <p>New here? <a href="/register">Create an account</a></p>
+    </div>
+</body>
+
+</html>

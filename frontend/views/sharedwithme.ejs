@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Shared With Me | DigitalDocsHub</title>
+    <link rel="stylesheet" href="/CSS/sharedwithme.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>📬 Documents Shared With Me</h1>
+
+        <% if (sharedDocs.length === 0) { %>
+            <p class="empty">No documents have been shared with you yet.</p>
+            <% } else { %>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Shared By</th>
+                            <th>Permission</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% sharedDocs.forEach(doc => { %>
+                            <tr>
+                                <td>
+                                    <%= doc.title %>
+                                </td>
+                                <td>
+                                    <%= doc.description || '-' %>
+                                </td>
+                                <td>
+                                    <%= doc.sharedByName || doc.sharedByEmail %>
+                                </td>
+                                <td>
+                                    <%= doc.permission %>
+                                </td>
+                                <td>
+                                    <a href="/view/<%= doc.id %>" class="btn view">View</a>
+                                    <% if (doc.permission === 'download') { %>
+                                        <a href="/download/<%= doc.id %>" class="btn download">Download</a>
+                                        <% } %>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+                <% } %>
+    </div>
+</body>
+
+</html>

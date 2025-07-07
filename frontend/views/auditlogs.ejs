@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Audit Logs | DigitalDocsHub</title>
+    <link rel="stylesheet" href="/CSS/auditlogs.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>📊 Audit Logs</h1>
+
+        <% if (logs.length === 0) { %>
+            <p class="no-logs">No activity recorded yet.</p>
+            <% } else { %>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Document</th>
+                            <th>Action</th>
+                            <th>User</th>
+                            <th>Timestamp</th>
+                            <th>IP / Device</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% logs.forEach(log => { %>
+                            <tr>
+                                <td>
+                                    <%= log.documentTitle || '—' %>
+                                </td>
+                                <td><span class="badge <%= log.action %>"><%= log.action.toUpperCase() %></span></td>
+                                <td>
+                                    <%= log.userName || log.userEmail %>
+                                </td>
+                                <td>
+                                    <%= new Date(log.timestamp).toLocaleString() %>
+                                </td>
+                                <td>
+                                    <%= log.ip || '—' %>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+                <% } %>
+    </div>
+</body>
+
+</html>

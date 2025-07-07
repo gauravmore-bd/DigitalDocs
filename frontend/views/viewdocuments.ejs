@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        <%= doc.title %> | DigitalDocsHub</title>
+    <link rel="stylesheet" href="/CSS/viewdocument.css">
+</head>
+
+<body>
+    <header class="top-bar">
+        <a class="back-btn" href="/my-documents">← My Documents</a>
+    </header>
+
+    <main class="wrapper">
+        <section class="details-card">
+            <h1 class="doc-title">
+                <%= doc.title %>
+            </h1>
+
+            <ul class="meta">
+                <li><strong>Description:</strong>
+                    <%= doc.description || '—' %>
+                </li>
+                <li><strong>Uploaded:</strong>
+                    <%= new Date(doc.uploadedAt).toLocaleString() %>
+                </li>
+                <li><strong>Permission:</strong>
+                    <%= doc.permission %>
+                </li>
+                <li><strong>Size:</strong>
+                    <%= (doc.size/1024).toFixed(1) %> KB</li>
+            </ul>
+
+            <div class="actions">
+                <a href="/download/<%= doc.id %>" class="btn primary" <%=d oc.permission==='view' ? 'disabled' : '' %>>
+          Download
+        </a>
+
+                <a href="/edit/<%= doc.id %>" class="btn secondary">Edit</a>
+
+                <form action="/delete/<%= doc.id %>" method="POST" class="inline">
+                    <button type="submit" class="btn danger">Delete</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="viewer">
+            <% if (doc.mimetype === 'application/pdf') { %>
+                <!-- PDF preview -->
+                <iframe src="/uploads/<%= doc.filename %>#toolbar=0&navpanes=0" class="pdf-frame"></iframe>
+                <% } else { %>
+                    <!-- Fallback preview -->
+                    <div class="no-preview">
+                        <p>Preview not available for this file type.</p>
+                        <a href="/download/<%= doc.id %>" class="btn primary" <%=d oc.permission==='view' ? 'disabled' : '' %>>
+            Download File
+          </a>
+                    </div>
+                    <% } %>
+        </section>
+    </main>
+</body>
+
+</html>
